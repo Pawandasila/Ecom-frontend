@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   ShoppingCart,
   Star,
@@ -8,8 +8,6 @@ import {
   ShoppingBag,
   Badge,
   User,
-  Grid,
-  List,
   Heart,
   Pencil,
   Trash2
@@ -34,7 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function ProductsPage() {
+function ProductsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
@@ -458,5 +456,17 @@ export default function ProductsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }
