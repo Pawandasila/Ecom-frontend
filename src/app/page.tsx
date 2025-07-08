@@ -10,8 +10,8 @@ import { setCookie } from 'cookies-next';
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "pawandasila06@gmail.com",
+    password: "Pawan2004*",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -34,34 +34,34 @@ export default function LoginPage() {
       if (response.status === 200) {
         const { accessToken, refreshToken, user } = response.data;
         
-        // Set cookies with appropriate expiry and security options
+        
         setCookie('accessToken', accessToken, {
-          maxAge: 60 * 60 * 24, // 24 hours
+          maxAge: 60 * 60 * 24, 
           path: '/',
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'strict'
         });
         
         setCookie('refreshToken', refreshToken, {
-          maxAge: 60 * 60 * 24 * 7, // 7 days
+          maxAge: 60 * 60 * 24 * 7, 
           path: '/',
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'strict'
         });
         
         setCookie('userRole', user.role, {
-          maxAge: 60 * 60 * 24, // 24 hours
+          maxAge: 60 * 60 * 24, 
           path: '/',
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'strict'
         });
 
-        // Store user data in localStorage
+        
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         
-        // Redirect based on role
+        
         if (user.role === 'admin') {
           router.push("/admin/dashboard");
         } else {
