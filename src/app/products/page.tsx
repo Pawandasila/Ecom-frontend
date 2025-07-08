@@ -56,7 +56,7 @@ function ProductsContent() {
     const page = searchParams?.get('page') || '1';
     fetchProducts(Number(page));
     
-    // Get user role from localStorage
+    
     const user = localStorage.getItem('user');
     if (user) {
       const userData = JSON.parse(user);
@@ -69,7 +69,7 @@ function ProductsContent() {
       setLoading(true);
       let url = new URL(`${backendUrl}/products/`);
       
-      // Add query parameters
+      
       const params = new URLSearchParams();
       params.append('page', page.toString());
       params.append('limit', '9');
@@ -290,7 +290,12 @@ function ProductsContent() {
                   )}
                   <DropdownMenuItem>Settings</DropdownMenuItem>
                   <DropdownMenuItem>Order History</DropdownMenuItem>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => {
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
+                    localStorage.removeItem('user');
+                    router.push('/');
+                  }}>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -332,7 +337,7 @@ function ProductsContent() {
                       className="bg-white/80 backdrop-blur-sm hover:bg-white"
                       onClick={() => {
                         if (confirm('Are you sure you want to delete this product?')) {
-                          // Add delete functionality
+                          
                         }
                       }}
                     >
