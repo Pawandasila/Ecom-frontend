@@ -10,8 +10,8 @@ import { setCookie } from 'cookies-next';
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "pawandasila06@gmail.com",
-    password: "Pawan2004*",
+    email: "",
+    password: "",
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
