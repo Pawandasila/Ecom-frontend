@@ -291,9 +291,15 @@ function ProductsContent() {
                   <DropdownMenuItem>Settings</DropdownMenuItem>
                   <DropdownMenuItem>Order History</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => {
+                    // Remove localStorage items
                     localStorage.removeItem('accessToken');
                     localStorage.removeItem('refreshToken');
                     localStorage.removeItem('user');
+                    
+                    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    
                     router.push('/');
                   }}>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
